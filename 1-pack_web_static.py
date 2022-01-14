@@ -11,7 +11,7 @@ from fabric.api import local
 def do_pack():
     """Create the tar gzipped archive."""
     current_date = datetime.now().strftime("%Y%m%d%H%M%S")
-    created_file = f"versions/web_static_{current_date}.tgz"
+    created_file = "versions/web_static_{}.tgz".format(current_date)
 
     if os.path.isdir("versions") is False:
         if local("mkdir -p versions").failed is True:
