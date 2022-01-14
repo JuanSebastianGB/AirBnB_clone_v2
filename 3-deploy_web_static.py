@@ -1,11 +1,36 @@
 #!/usr/bin/python3
 """
-distributes an archive to your web servers, using the function do_deploy
+Script to implement deploy to a web server
 """
 
 from os.path import exists
 from fabric.api import *
+import os.path
+from datetime import datetime
+from fabric.api import local
+
 env.hosts = ['23.20.35.69', '35.227.91.66']
+
+
+def deploy():
+    "Implements creation of tar file and deploy the project"
+    path = do_pack()
+    if path:
+        do_deploy(path)
+    return None
+
+
+def do_pack():
+    """Create the tar gzipped archive."""
+    current_date = datetime.now().strftime("%Y%m%d%H%M%S")
+    created_file = "versions/web_static_{}.tgz".format(current_date)
+
+    if os.path.isdir("versions") is False:
+        if local("mkdir -p versions").failed is True:
+            return None
+    if local("tar -cvzf {} web_static".format(created_file)).failed is True:
+        return None
+    return created_file
 
 
 def do_deploy(archive_path):
