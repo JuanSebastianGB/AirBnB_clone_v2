@@ -46,11 +46,11 @@ package { 'nginx':
 file { ['/var/','/var/www/','/var/www/html']:
     ensure => 'directory'
 }
--> file { 'var/www/html/index.html':
+-> file { '/var/www/html/index.html':
     ensure  => 'present',
     content => "Holberton School\n"
 }
--> file { 'var/www/html/404.html':
+-> file { '/var/www/html/404.html':
     ensure  => 'present',
     content => "Ceci n'est pas une page\n"
 }
