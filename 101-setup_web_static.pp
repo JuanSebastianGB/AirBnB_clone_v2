@@ -59,6 +59,6 @@ file { ['/var/','/var/www/','/var/www/html']:
     content => $config,
 }
 
--> service { 'nginx restart':
-    require => 'etc/init.d'
+-> exec { 'nginx restart':
+    require => '/etc/init.d'
 }
