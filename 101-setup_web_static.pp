@@ -60,5 +60,5 @@ file { ['/var/','/var/www/','/var/www/html']:
 }
 
 -> exec { 'nginx restart':
-    require => '/etc/init.d'
+    path => '/etc/init.d'
 }
