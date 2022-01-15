@@ -2,9 +2,9 @@
 """
 deletes out-of-date archives, using the function do_clean
 """
-from ensurepip import version
 from fabric.api import *
 import os
+env.hosts = ['23.20.35.69', '35.227.91.66']
 
 
 def sort_versions(versions):
@@ -24,7 +24,7 @@ def delete_versions_remote(number=0):
         versions = run("ls -rt").split()
         versions = [
             version for version in versions if "web_static" in version]
-        [version.pop() for _ in range(number)]
+        [versions.pop() for _ in range(number)]
         [run("rm -rf ./{}".format(version)) for version in versions]
 
 
