@@ -14,13 +14,13 @@ def index():
     return 'Hello HBNB!'
 
 
-@app.route('/', strtict_slashes=False)
+@app.route('/', strict_slashes=False)
 def hbnb():
     """ Defining hbnb route"""
     return 'HBNB'
 
 
-@app.route('/c/<text>', strtict_slashes=False)
+@app.route('/c/<text>', strict_slashes=False)
 def c(text):
     """ Defining c route with an input"""
     return 'C {}'.format(text.replace('_', ' '))
