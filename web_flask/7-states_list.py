@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Stars Flask web application
+Start Flask web application
 """
 from models import storage
 from flask import Flask
