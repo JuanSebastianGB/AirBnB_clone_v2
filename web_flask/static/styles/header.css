@@ -1,0 +1,6 @@
+.logo {
+    width       : 150px;
+    height      : 80px;
+    background  : url("../images/logo.png") no-repeat;
+    padding-left: 20px;
+}
