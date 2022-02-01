@@ -2,6 +2,7 @@
 """ City Module for HBNB project """
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
+from models import base_model
 from models.base_model import Base, BaseModel
 from os import getenv
 
@@ -15,7 +16,7 @@ if getenv('HBNB_TYPE_STORAGE') == 'db':
         name = Column(String(128), nullable=False)
         places = relationship('Place', backref='cities', cascade='delete')
 else:
-    class City(Basemodel):
+    class City(base_model.BaseModel):
         """ The city class, contains state ID and name """
         name = ''
         state_id = ''
