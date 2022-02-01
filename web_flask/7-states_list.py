@@ -12,11 +12,12 @@ app = Flask(__name__)
 @app.route('/states_list', strict_slashes=False)
 def states_list():
     """ Rendering template to show states list """
-    return render_template('7-states_list.html', states=storage.all('State'))
+    return render_template('7-states_list.html',
+                           states=storage.all('State').values())
 
 
 @app.teardown_appcontext
-def teardown(exc):
+def teardown(self):
     """Remove the current session."""
     storage.close()
 

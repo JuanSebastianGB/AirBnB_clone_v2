@@ -6,13 +6,16 @@ from models.base_model import Base, BaseModel
 from os import getenv
 
 
-class City(BaseModel, Base):
-    """ The city class, contains state ID and name """
-    if getenv('HBNB_TYPE_STORAGE') == 'db':
+if getenv('HBNB_TYPE_STORAGE') == 'db':
+    class City(BaseModel, Base):
+        """ The city class, contains state ID and name """
         __tablename__ = 'cities'
-        state_id = Column(String(60), ForeignKey('states.id'), nullable=False)
+        state_id = Column(String(60), ForeignKey(
+            'states.id'), nullable=False)
         name = Column(String(128), nullable=False)
         places = relationship('Place', backref='cities', cascade='delete')
-    else:
+else:
+    class City(Basemodel):
+        """ The city class, contains state ID and name """
         name = ''
         state_id = ''
