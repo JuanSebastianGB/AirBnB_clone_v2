@@ -8,21 +8,22 @@ import models
 from models.city import City
 
 
-class State(BaseModel, Base):
-    """ State class """
-    __tablename__ = 'states'
-    name = Column(String(128), nullable=False)
+if getenv('HBNB_TYPE_STORAGE') == 'db':
+    class State(BaseModel, Base):
+        """ State class """
+        __tablename__ = "states"
+        name = Column(String(128), nullable=False)
+        cities = relationship('City', backref='states', cascade='delete')
+else:
+    class State(BaseModel):
+        """ State class """
+        name = Column(String(128), nullable=False)
 
-    cities = relationship('City', backref='state', cascade='delete')
-
-    if getenv('HBNB_TYPE_STORAGE') == 'db':
-        pass
-    else:
         @property
         def cities(self):
             """Get cities.
-            Returns the list of City instances with state_id equals to the
-            current State.id"""
+                Returns the list of City instances with state_id equals to the
+                current State.id"""
             cities = models.storage.all(City)
             return [city for city in cities.values()
                     if self.id == city.state_id]
