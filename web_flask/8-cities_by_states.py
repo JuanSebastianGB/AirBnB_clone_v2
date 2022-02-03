@@ -17,7 +17,7 @@ def cities_by_states():
 
 
 @app.teardown_appcontext
-def teardown(exc):
+def teardown_session(exc):
     """Remove the current session."""
     storage.close()
 
