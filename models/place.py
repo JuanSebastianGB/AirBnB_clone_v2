@@ -77,5 +77,5 @@ else:
             Args:
                 value ([Amenity]): amenity to be appended
             """
-            if value.__class__.__name__ == 'Amenity':
+            if value.__class__.__name__ == Amenity:
                 self.amenities.append(value)
