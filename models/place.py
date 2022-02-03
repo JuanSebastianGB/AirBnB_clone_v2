@@ -10,11 +10,12 @@ from os import getenv
 
 if getenv('HBNB_TYPE_STORAGE') == 'db':
     place_amenity = Table('place_amenity', Base.metadata,
-                          Column('place_id', String(60), ForeignKey('places.id'),
+                          Column('place_id', String(60),
+                                 ForeignKey('places.id'),
                                  primary_key=True, nullable=False),
                           Column('amenity_id', String(60),
                                  ForeignKey('amenities.id'),
-                                 primary_key=True, nullable=False))
+                                 nullable=False))
 
     class Place(BaseModel, Base):
         """ A place to stay """
@@ -30,9 +31,11 @@ if getenv('HBNB_TYPE_STORAGE') == 'db':
         latitude = Column(Float)
         longitude = Column(Float)
 
-        reviews = relationship('Review', backref='place', cascade='delete')
-        amenities = relationship('Amenity', secondary=place_amenity,
-                                 overlaps="place_amenities", viewonly=False)
+        reviews = relationship('Review', backref='place',
+                               cascade='all, delete, delete-orphan')
+        amenities = relationship('Amenity', secondary='place_amenity',
+                                 back_populates="place_amenities",
+                                 viewonly=False)
 else:
     class Place(BaseModel):
         city_id = ''
