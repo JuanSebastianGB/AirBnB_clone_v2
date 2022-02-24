@@ -20,7 +20,7 @@ def onepage():
     """
     Defining one-route
     """
-    return "Hello HBNB!ubuntu"
+    return "Hello HBNB!"
 
 
 if __name__ == '__main__':
